@@ -100,6 +100,15 @@
             cursor.style.top = e.clientY + "px";
         };
 
+        window.onmousemove = function(e) {
+    setTimeout(() => {
+        const cursor = document.getElementById('cursor');
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+    }, 200); // 100ms의 시간차를 두고 커서 위치 업데이트
+};
+
+
         // 각 메시지 나타나게 하기
         const messages = [
             'second-message',
