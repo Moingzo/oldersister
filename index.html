@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>언니체험</title>
+    <style type="text/css">
+        body { margin: 0; }
+        #cursor {
+            position: absolute;
+            pointer-events: none; /* 커서와 상호작용을 방지 */
+        }
+        #rotate {
+            animation: rotate 4s infinite linear, grow 10s infinite alternate;
+            width: 40px;
+            height: auto; 
+        }
+        @keyframes rotate {
+            to { transform: rotate(360deg); }   
+        }
+        @keyframes grow {
+            0% { transform: scale(1.5); } 
+            100% { transform: scale(10.0); }
+        }
+        @font-face {
+            font-family: 'YoonChildfundkoreaManSeh';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2408@1.0/YoonChildfundkoreaManSeh.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'UhBeeSeulvely';
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_five@.2.0/UhBeeSeulvely.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        h1 {
+            color: black;
+            font-size: 80px;
+            font-family: "UhBeeSeulvely";
+            font-optical-sizing: auto; 
+            font-weight: 900; 
+            font-style: normal;
+            text-align: center;
+            margin: 0;
+            opacity: 0; /* 초기 상태에서 숨김 */
+            transition: opacity 1s, transform 1s; /* 투명도 및 변형 애니메이션 */
+            transform: translate(-50%, -50%) rotate(0deg); /* 중앙 정렬 및 회전 초기화 */
+            position: absolute; /* 절대 위치 설정 */
+            top: 50%; /* 세로 중앙 */
+            left: 50%; /* 가로 중앙 */
+            cursor: pointer; /* 클릭 가능하다는 느낌을 주기 위해 커서 변경 */
+        }
+
+        .message {
+            color: black;
+            font-family: "YoonChildfundkoreaManSeh";
+            opacity: 0;
+            transition: opacity 1s;
+        }
+
+        #second-message { font-size: 40px; position: absolute; top: 400px; left: 150px; }
+        #third-message { font-size: 30px; position: absolute; top: 250px; left: 1300px; }
+        #fourth-message { font-size: 35px; position: absolute; top: 750px; left: 900px; }
+        #fif-message { font-size: 35px; position: absolute; top: 150px; left: 350px; }
+        #six-message { font-size: 45px; position: absolute; top: 550px; left: 1400px; }
+        #sev-message { font-size: 35px; position: absolute; top: 100px; left: 1000px; }
+        #eig-message { font-size: 35px; position: absolute; top: 700px; left: 200px; }
+
+        section {
+            height: 100vh; /* 전체 화면 높이 */
+            display: flex; /* flexbox 사용 */
+            justify-content: center; /* 가로 중앙 정렬 */
+            align-items: center; /* 세로 중앙 정렬 */
+            flex-direction: column; /* 세로 방향 정렬 */
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h1 id="main-message">아 그만 좀 따라와~!</h1>
+        <div id="second-message" class="message">언니 같이 가 ~</div>
+        <div id="third-message" class="message">언니 나도 언니 친구들이랑 놀아도 돼~?</div>
+        <div id="fourth-message" class="message">언니 나도 머리 언니처럼 해줘~ ~</div>
+        <div id="fif-message" class="message">언니 나 이 가방 빌려도 돼 ~?</div>
+        <div id="six-message" class="message">언니 나 배고파 ㅠㅠ</div>
+        <div id="sev-message" class="message">언니 이거 해줘~</div>
+        <div id="eig-message" class="message">언니 언니 옷 입어도 돼??</div>
+    </section>
+
+    <div id="cursor">
+        <img id="rotate" src="sis.gif" alt="cursor" />
+    </div>
+    <script type="text/javascript">
+        window.onmousemove = function(e) {
+            const cursor = document.getElementById('cursor');
+            cursor.style.left = e.clientX + "px";
+            cursor.style.top = e.clientY + "px";
+        };
+
+        // 각 메시지 나타나게 하기
+        const messages = [
+            'second-message',
+            'third-message',
+            'fourth-message',
+            'fif-message',
+            'six-message',
+            'sev-message',
+            'eig-message'
+        ];
+
+        messages.forEach((id, index) => {
+            setTimeout(() => {
+                document.getElementById(id).style.opacity = 1; // 문구 보이게 설정
+            }, (index + 1) * 1000); // 1초 간격으로 표시
+        });
+
+        // 마지막으로 main-message 나타나게 하기 (회전하면서)
+        setTimeout(() => {
+            const mainMessage = document.getElementById('main-message');
+            mainMessage.style.opacity = 1; // 문구 보이게 설정
+            mainMessage.style.transform = "translate(-50%, -50%) rotate(360deg)"; // 회전 애니메이션 추가
+            
+            // 클릭 이벤트 추가
+            mainMessage.onclick = function() {
+                alert("그래도 난 너가 좋아~");
+            };
+        }, (messages.length + 1) * 1000); // 모든 메시지 후에 표시
+    </script>
+</body>
+</html>
